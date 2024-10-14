@@ -1,0 +1,134 @@
+/* Container for the whole chat application */
+.chat-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Window where all messages are shown */
+  .chat-window {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    height: 300px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Container for each message */
+  .message-container {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: flex-start;  /* Default for server messages */
+    align-items: flex-start; /* Align user and server message to the top */
+  }
+  
+  /* User message alignment */
+  .user-message {
+    justify-content: flex-end;  /* Aligns user messages to the right */
+  }
+  
+  /* User message bubble */
+  .user-message .message-bubble {
+    background-color: #007bff;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    max-width: 60%;
+    word-wrap: break-word;
+    text-align: left;
+    position: relative;
+    margin-left: 30px; /* Push the bubble right to make space for controls */
+  }
+  
+  /* Server message bubble */
+  .server-message .message-bubble {
+    background-color: #d1f2eb;
+    color: #333;
+    border-radius: 15px;
+    padding: 10px;
+    max-width: 60%;
+    word-wrap: break-word;
+    text-align: left;
+    position: relative;
+  }
+  
+  /* Add a pointer (tail) to the user message bubble */
+  .user-message .message-bubble::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #007bff;
+  }
+  
+  /* Add a pointer (tail) to the server message bubble */
+  .server-message .message-bubble::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #d1f2eb transparent transparent;
+  }
+  
+  /* Chat-specific input field */
+  .message-input {
+    padding: 10px;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  
+  /* Chat-specific button */
+  .send-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Button hover effect */
+  .send-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Message controls (icons) on the left side */
+  .message-controls {
+    display: none; /* Hide by default */
+    position: absolute;
+    top: 5px;
+    left: -40px; /* Position the controls to the left of the bubble */
+    display: flex;
+    gap: 10px; /* Add space between the icons */
+    align-items: center;
+  }
+  
+  /* Show icons on hover */
+  .message-bubble:hover .message-controls {
+    display: flex; /* Show when hovering over message bubble */
+  }
+  
+  /* Style for icons */
+  .message-controls {
+    cursor: pointer;
+    font-size: 14px;
+    color: #ffffff00; /* Use same color as the message bubble for user messages */
+  }
+  
+  .message-controls:hover {
+    color: #505050; /* Change color on hover */
+  }
+
+  .message-controls i:hover {
+    color: #212121; /* Change color on hover */
+  }
+  
