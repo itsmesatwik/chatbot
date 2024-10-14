@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./styles.css"; // Import the CSS file
+import Accordion from "./Accordion";
 
 interface Message {
   id: number;
@@ -12,6 +13,17 @@ const App: React.FC = () => {
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [editingMessageId, setEditingMessageId] = useState<number | null>(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+
+  const toggleSettings = () => {
+    setIsSettingsOpen(!isSettingsOpen); // Toggle accordion visibility
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      editingMessageId ? editMessage(editingMessageId) : sendMessage();
+    }
+  };
 
   const sendMessage = async () => {
     try {
@@ -39,8 +51,13 @@ const App: React.FC = () => {
     }
   };
 
-  const clearChat = () => {
-    setMessages([]); // Clear all messages in the frontend
+  const clearChat = async () => {
+    try {
+      const res = await axios.delete("http://localhost:8000/chat/clear/");
+      setMessages(res.data.messages); // Reset messages based on the server's response
+    } catch (error) {
+      console.error("Error clearing chat", error);
+    }
   };
 
   const deleteMessage = async (id: number) => {
@@ -94,6 +111,7 @@ const App: React.FC = () => {
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={handleKeyDown} // Add this line
         placeholder="Type a message"
         className="message-input"
       />
@@ -109,6 +127,23 @@ const App: React.FC = () => {
           Send
         </button>
       )}
+      <Accordion title="Settings">
+        <button onClick={clearChat} className="clear-button">
+          Clear Chat
+        </button>
+      </Accordion>
+      {/* <div className="settings-container">
+        <button onClick={toggleSettings} className="settings-button">
+          <i className="fas fa-cog settings-icon"></i>
+        </button>
+        {isSettingsOpen && (
+          <Accordion title="Settings">
+            <button onClick={clearChat} className="clear-button">
+              Clear Chat
+            </button>
+          </Accordion>
+        )}
+      </div> */}
     </div>
   );
 };

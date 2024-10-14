@@ -21,20 +21,20 @@
   .message-container {
     display: flex;
     margin-bottom: 10px;
-    justify-content: flex-start;  /* Default for server messages */
+    justify-content: flex-start; /* Default for server messages */
     align-items: flex-start; /* Align user and server message to the top */
   }
   
   /* User message alignment */
   .user-message {
-    justify-content: flex-end;  /* Aligns user messages to the right */
+    justify-content: flex-end; /* Aligns user messages to the right */
   }
   
   /* User message bubble */
   .user-message .message-bubble {
     background-color: #007bff;
     color: white;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px;
     max-width: 60%;
     word-wrap: break-word;
@@ -47,12 +47,97 @@
   .server-message .message-bubble {
     background-color: #d1f2eb;
     color: #333;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px;
     max-width: 60%;
     word-wrap: break-word;
     text-align: left;
     position: relative;
+  }
+  
+  /* Add chatbot image next to the server message */
+  .server-message {
+    position: relative;
+  }
+  
+  .server-message::before {
+    content: "";
+    position: absolute;
+    left: -40px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background-image: url("https://via.placeholder.com/30"); /* Replace with actual chatbot image */
+    background-size: cover;
+    border-radius: 50%;
+  }
+  
+  /* Chat-specific input field */
+  .message-input {
+    padding: 10px;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  
+  /* Chat-specific button */
+  .send-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .send-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Settings container */
+  .settings-container {
+    position: relative;
+    margin-top: 15px;
+  }
+  
+  /* Settings button */
+  .settings-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Settings icon */
+  .settings-icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  /* Accordion for settings */
+  .settings-accordion {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  /* Clear Chat button */
+  .clear-button {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .clear-button:hover {
+    background-color: #c82333;
   }
   
   /* Add a pointer (tail) to the user message bubble */
@@ -77,42 +162,17 @@
     border-color: transparent #d1f2eb transparent transparent;
   }
   
-  /* Chat-specific input field */
-  .message-input {
-    padding: 10px;
-    width: 80%;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-  }
-  
-  /* Chat-specific button */
-  .send-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Button hover effect */
-  .send-button:hover {
-    background-color: #0056b3;
-  }
-  
   /* Message controls (icons) on the left side */
   .message-controls {
-    display: none; /* Hide by default */
+    display: none;
     position: absolute;
     top: 5px;
-    left: -40px; /* Position the controls to the left of the bubble */
+    left: -40px;
     display: flex;
-    gap: 10px; /* Add space between the icons */
+    gap: 10px;
     align-items: center;
   }
   
-  /* Show icons on hover */
   .message-bubble:hover .message-controls {
     display: flex; /* Show when hovering over message bubble */
   }
@@ -121,14 +181,14 @@
   .message-controls {
     cursor: pointer;
     font-size: 14px;
-    color: #ffffff00; /* Use same color as the message bubble for user messages */
+    color: #ffffff00;
   }
   
   .message-controls:hover {
-    color: #505050; /* Change color on hover */
+    color: #6d6d6d;
   }
-
+  
   .message-controls i:hover {
-    color: #212121; /* Change color on hover */
+    color: #212121;
   }
   

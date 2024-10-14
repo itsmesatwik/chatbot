@@ -49,3 +49,10 @@ async def delete_message(message_id: int):
     # Filter out the message to be deleted
     messages = [msg for msg in messages if msg.id != message_id or msg.sender != "user"]  # Only user messages can be deleted
     return {"response": "Message deleted", "messages": messages}
+
+# Clear all messages
+@app.delete("/chat/clear/")
+async def clear_chat():
+    global messages
+    messages.clear()
+    return {"response": "Chat cleared", "messages": messages}
